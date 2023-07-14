@@ -1,0 +1,29 @@
+name: Update Package and Publish
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update package version
+        run: npm version patch
+          # Add your script/command to update the package.json version here
+
+      - name: Publish package
+        run: npm publish
+          # Add your script/command to publish the package here
